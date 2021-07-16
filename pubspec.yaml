@@ -31,6 +31,8 @@ dependencies:
   flutter_geopackage: ^0.4.8
   sqlite3_flutter_libs: ^0.5.0
   path_provider: ^2.0.2
+  location: ^4.3.0
+  bloc: ^7.0.0
 
 dev_dependencies:
   flutter_test:
