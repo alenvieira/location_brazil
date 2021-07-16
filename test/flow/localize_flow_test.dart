@@ -1,10 +1,13 @@
 // @dart=2.11
-import 'package:mockito/mockito.dart';
-import 'package:location/location.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:location/location.dart';
+import 'package:location_brazil/bloc/bloc_provider.dart';
 import 'package:location_brazil/bloc/location_bloc.dart';
 import 'package:location_brazil/bloc/location_state.dart';
 import 'package:location_brazil/model/city.dart';
+import 'package:location_brazil/screen/location_screen.dart';
+import 'package:mockito/mockito.dart';
 
 import '../mock/mock.dart';
 
@@ -58,5 +61,30 @@ void main() {
       await expectLater(bloc.stream,
           emitsInOrder([isA<ProcessingState>(), isA<ErrorState>()]));
     });
+  });
+
+  testWidgets('Should return name city when press button', (tester) async {
+    final screen = MaterialApp(
+        home: BlocProvider(
+      bloc: bloc,
+      child: LocationPage(),
+    ));
+    when(location.getLocation()).thenAnswer((_) async =>
+        LocationData.fromMap({'latitude': -15.7801, 'longitude': -47.9292}));
+    when(dao.getCity(latitude: -15.7801, longitude: -47.9292))
+        .thenAnswer((_) async => City(name: 'Brasília'));
+    await tester.pumpWidget(screen);
+    final button = find.byType(ElevatedButton);
+    expect(button, findsOneWidget);
+    final loading = find.byType(CircularProgressIndicator);
+    expect(loading, findsNothing);
+    tester.tap(button);
+    await tester.runAsync(() => bloc.stream.first);
+    await tester.pump();
+    expect(loading, findsOneWidget);
+    await tester.runAsync(() => bloc.stream.first);
+    await tester.pump();
+    var textFind = find.text("Brasília");
+    expect(textFind, findsOneWidget);
   });
 }
