@@ -4,5 +4,5 @@ App to locate the city in Brazil you are.
 
 ## TODO
 - Verify launcher icon.
-- Add internationalization.
 - Publish in Google Play.
+- Improve this readme (Ex. how to run tests)

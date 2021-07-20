@@ -1,4 +1,3 @@
-import 'package:location_brazil/geodatabase/app_geodatabase.dart';
 import 'package:mockito/mockito.dart';
 import 'package:location/location.dart';
 import 'package:location_brazil/model/city.dart';

@@ -1,20 +1,21 @@
 // @dart=2.11
+import '../mock/mock.dart';
+import 'package:mockito/mockito.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:location/location.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:location_brazil/model/city.dart';
 import 'package:location_brazil/bloc/bloc_provider.dart';
 import 'package:location_brazil/bloc/location_bloc.dart';
 import 'package:location_brazil/bloc/location_state.dart';
-import 'package:location_brazil/model/city.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:location_brazil/screen/location_screen.dart';
-import 'package:mockito/mockito.dart';
-
-import '../mock/mock.dart';
 
 void main() {
   final dao = MockLocationDao();
   final location = MockLocation();
   final bloc = LocationBloc(dao, location);
+  EasyLocalization.logger.enableBuildModes = [];
 
   group('tests DAO', () {
     test('Should return City when called getCity in DAO', () async {

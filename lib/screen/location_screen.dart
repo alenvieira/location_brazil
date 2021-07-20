@@ -3,6 +3,8 @@ import 'package:location_brazil/model/city.dart';
 import 'package:location_brazil/bloc/bloc_provider.dart';
 import 'package:location_brazil/bloc/location_bloc.dart';
 import 'package:location_brazil/bloc/location_state.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class LocationPage extends StatelessWidget {
   @override
@@ -10,7 +12,9 @@ class LocationPage extends StatelessWidget {
     final LocationBloc bloc = BlocProvider.get(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Localiza Brasil'),
+        title: Text(
+          tr('title'),
+        ),
         leading: Image.asset('icon/br.png'),
       ),
       body: Center(
@@ -52,7 +56,7 @@ class LocationPage extends StatelessWidget {
                   bloc.add(LocationEvent.process);
                 },
                 child: Text(
-                  "Saiba sua localização",
+                  tr('button_text'),
                   style: TextStyle(color: Colors.white),
                 ),
               ),
