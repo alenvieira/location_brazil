@@ -15,7 +15,7 @@ class LocationPage extends StatelessWidget {
         title: Text(
           tr('title'),
         ),
-        leading: Image.asset('icon/br.png'),
+        leading: Image.asset('assets/icon/br.png'),
       ),
       body: Center(
         child: Column(
